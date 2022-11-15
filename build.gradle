@@ -23,6 +23,15 @@ ext {
 	set('snippetsDir', file("build/generated-snippets"))
 }
 
+/* 2022.11.15 - lcomment : jar 파일로 만들 때 rest docs 가 해당 jar 파일에 들어가게끔 하기 위한 설정 */
+bootJar {
+	dependsOn asciidoctor
+	copy {
+		from "${asciidoctor.outputDir}"
+		into 'BOOT-INF/classes/static/docs'
+	}
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
