@@ -9,6 +9,8 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Cafe {
     @Id
@@ -18,7 +20,7 @@ public class Cafe {
     @Column(length = 30, nullable = false)
     private String title;
 
-    @Column()
+    @Column(nullable = false)
     private Integer like_count;
 
     @Column(length = 255, nullable = false)
@@ -32,9 +34,7 @@ public class Cafe {
         }
     }
 
-    @Builder
-    public Cafe(String title, String naver_url){
-        this.title = title;
-        this.naver_url = naver_url;
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cafe_address_id")
+    private CafeAddress cafeAddress;
 }
