@@ -2,10 +2,7 @@ package net.cafree.domain.cafe.dao;
 
 import net.cafree.domain.cafe.domain.Cafe;
 import net.cafree.domain.cafe.domain.CafeAddress;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +10,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -141,7 +137,7 @@ public class CafeRepositoryTest {
         // when
         Cafe existCafe = cafeRepository.findById(cafe.getId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 카페가 존재하지 않습니다"));
-        CafeAddress existCafeAddress = cafeAddressRepository.findById(cafeAddress.getId())
+        CafeAddress existCafeAddress = cafeAddressRepository.findById(existCafe.getCafeAddress().getId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 주소가 존재하지 않습니다"));
 
         // then
@@ -172,6 +168,18 @@ public class CafeRepositoryTest {
 
         // then
         assertThat(cafeList.size()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("키워드에 해당하는 카페가 없는 조회하기")
+    public void selectCafeFail(){
+        // given
+        String keyword = "롯데리아";
+
+        // when
+        List<Cafe> cafeList = cafeRepository.findByTitleContains(keyword);
+
+        assertThat(cafeList.size()).isEqualTo(0);
     }
 
     @Test
