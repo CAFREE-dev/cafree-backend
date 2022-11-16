@@ -102,8 +102,8 @@ public class CafeRepositoryTest {
         cafeRepository.deleteAll();
     }
 
-    @DisplayName("새로운 카페 등록하기")
     @Test
+    @DisplayName("새로운 카페 등록하기")
     public void registerNewCafe(){
         // given
         String sido = "경기";
@@ -159,5 +159,28 @@ public class CafeRepositoryTest {
         assertThat(existCafeAddress.getBranch()).isEqualTo(joinAddress.getBranch());
         assertThat(existCafeAddress.getLatitude()).isEqualTo(joinAddress.getLatitude());
         assertThat(existCafeAddress.getLongitude()).isEqualTo(joinAddress.getLongitude());
+    }
+
+    @Test
+    @DisplayName("키워드를 통해 카페 조회하기")
+    public void selectCafeByKeyword(){
+        // given
+        String keyword = "로그";
+
+        // when
+        List<Cafe> cafeList = cafeRepository.findByTitleContains(keyword);
+
+        // then
+        assertThat(cafeList.size()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("카페 목록 조회")
+    public void selectCafeList(){
+        // when
+        List<Cafe> cafeList = cafeRepository.findAll();
+
+        //then
+        assertThat(cafeList.size()).isEqualTo(4);
     }
 }
