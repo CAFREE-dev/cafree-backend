@@ -23,7 +23,7 @@ public class CafeRegisterRequestDto {
 
     private String doro;
 
-    private String build_no;
+    private String buildNo;
 
     private String branch;
 
