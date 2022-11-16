@@ -5,9 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Getter
-@Builder
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Cafe {
     @Id
@@ -34,4 +32,12 @@ public class Cafe {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cafe_address_id")
     private CafeAddress cafeAddress;
+
+    @Builder
+    public Cafe(String title, int like_count, String naver_url, CafeAddress cafeAddress){
+        this.title = title;
+        this.like_count = like_count;
+        this.naver_url = naver_url;
+        this.cafeAddress = cafeAddress;
+    }
 }

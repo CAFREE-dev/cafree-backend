@@ -6,9 +6,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Getter
-@Builder
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "cafe_address")
 public class CafeAddress {
@@ -42,4 +40,27 @@ public class CafeAddress {
 
     @Column(nullable = false)
     private BigDecimal longitude;
+
+    @Builder
+    public CafeAddress(
+            String sido,
+            String sigungu,
+            String eupmyun,
+            String dong,
+            String doro,
+            String build_no,
+            String branch,
+            BigDecimal latitude,
+            BigDecimal longitude
+    ){
+        this.sido = sido;
+        this.sigungu = sigungu;
+        this.eupmyun = eupmyun;
+        this.dong = dong;
+        this.doro = doro;
+        this.build_no = build_no;
+        this.branch = branch;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
