@@ -1,17 +1,14 @@
 package net.cafree.domain.cafe.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Cafe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

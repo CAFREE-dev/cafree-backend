@@ -1,19 +1,16 @@
 package net.cafree.domain.cafe.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
-@Table(name = "cafe_address")
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "cafe_address")
 public class CafeAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
