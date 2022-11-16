@@ -3,6 +3,7 @@ package net.cafree.domain.cafe.dao;
 import net.cafree.domain.cafe.domain.Cafe;
 import net.cafree.domain.cafe.domain.CafeAddress;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,6 +25,77 @@ public class CafeRepositoryTest {
 
     @Autowired
     CafeAddressRepository cafeAddressRepository;
+
+    @BeforeEach
+    void setup(){
+        CafeAddress cafeAddress1 = CafeAddress.builder()
+                .sido("경기")
+                .sigungu("안양시 만안구")
+                .dong("안양동")
+                .doro("안양로264번길 24")
+                .build_no("627-70")
+                .latitude(BigDecimal.valueOf(126.939171))
+                .longitude(BigDecimal.valueOf(37.3786908))
+                .build();
+
+        cafeRepository.save(Cafe.builder()
+                .title("모노폴리로그")
+                .naver_url("url1")
+                .cafeAddress(cafeAddress1)
+                .build());
+        cafeAddressRepository.save(cafeAddress1);
+
+        CafeAddress cafeAddress2 = CafeAddress.builder()
+                .sido("서울")
+                .sigungu("성동구")
+                .dong("하왕십리동")
+                .doro("청계천로 494")
+                .build_no("258")
+                .latitude(BigDecimal.valueOf(127.031639))
+                .longitude(BigDecimal.valueOf(37.5686891))
+                .build();
+
+        cafeRepository.save(Cafe.builder()
+                .title("로그라운드")
+                .naver_url("url2")
+                .cafeAddress(cafeAddress2)
+                .build());
+        cafeAddressRepository.save(cafeAddress2);
+
+        CafeAddress cafeAddress3 = CafeAddress.builder()
+                .sido("서울")
+                .sigungu("강남구")
+                .dong("역삼동")
+                .doro("언주로 537")
+                .build_no("662-14")
+                .latitude(BigDecimal.valueOf(127.040684))
+                .longitude(BigDecimal.valueOf(37.5059322))
+                .build();
+
+        cafeRepository.save(Cafe.builder()
+                .title("로그")
+                .naver_url("url3")
+                .cafeAddress(cafeAddress3)
+                .build());
+        cafeAddressRepository.save(cafeAddress3);
+
+        CafeAddress cafeAddress4 = CafeAddress.builder()
+                .sido("인천")
+                .sigungu("연수구")
+                .dong("송도동")
+                .doro("송도과학로16번길 13-18")
+                .build_no("송도동 174-1")
+                .latitude(BigDecimal.valueOf(126.660801))
+                .longitude(BigDecimal.valueOf(37.3810369))
+                .build();
+
+        cafeRepository.save(Cafe.builder()
+                .title("스폰타니티")
+                .naver_url("url4")
+                .cafeAddress(cafeAddress4)
+                .build());
+        cafeAddressRepository.save(cafeAddress4);
+    }
 
     @AfterEach
     public void cleanup(){
