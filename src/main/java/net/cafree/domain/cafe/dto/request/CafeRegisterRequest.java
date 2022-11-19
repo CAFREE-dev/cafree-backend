@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CafeRegisterRequestDto {
+public class CafeRegisterRequest {
     @NotNull
     private String title;
 

@@ -1,7 +1,7 @@
-package net.cafree.domain.cafe.dao;
+package net.cafree.domain.cafe.repository;
 
-import net.cafree.domain.cafe.domain.Cafe;
-import net.cafree.domain.cafe.domain.CafeAddress;
+import net.cafree.domain.cafe.entity.Cafe;
+import net.cafree.domain.cafe.entity.CafeAddress;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

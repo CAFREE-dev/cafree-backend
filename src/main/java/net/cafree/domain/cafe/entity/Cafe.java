@@ -1,4 +1,4 @@
-package net.cafree.domain.cafe.domain;
+package net.cafree.domain.cafe.entity;
 
 import lombok.*;
 
