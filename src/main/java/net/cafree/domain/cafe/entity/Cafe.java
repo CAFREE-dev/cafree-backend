@@ -1,7 +1,8 @@
 package net.cafree.domain.cafe.entity;
 
 import lombok.*;
-
+import net.cafree.domain.cafe.dto.response.CafeResponse;
+import net.cafree.domain.cafe.dto.response.SimpleCafeResponse;
 import javax.persistence.*;
 
 @Getter
@@ -39,5 +40,55 @@ public class Cafe {
         this.like_count = like_count;
         this.naver_url = naver_url;
         this.cafeAddress = cafeAddress;
+    }
+
+    public void updateCafe(String title, Integer likeCount, String mapUrl) {
+        this.title = title;
+        this.like_count = likeCount;
+        this.naver_url = mapUrl;
+    }
+
+    /* 2022.11.23 - rt3310 : User Entity가 구현되면 거리 계산 값, 북마크 여부 삽입 필요 */
+    public CafeResponse toCafeResponse() {
+        return CafeResponse.builder()
+                .id(id)
+                .title(title)
+                .mapUrl(naver_url)
+                .likeCount(like_count)
+                .preview("")
+                .isMarked(false)
+                .sido(cafeAddress.getSido())
+                .sigungu(toCafeResponse().getSigungu())
+                .eupmyun(cafeAddress.getEupmyun())
+                .dong(cafeAddress.getDong())
+                .doro(cafeAddress.getDoro())
+                .buildNo(cafeAddress.getBuild_no())
+                .branch(cafeAddress.getBranch())
+                .latitude(cafeAddress.getLatitude())
+                .longitude(cafeAddress.getLongitude())
+                .distance(0.0)
+                .build();
+    }
+
+    /* 2022.11.23 - rt3310 : User Entity가 구현되면 거리 계산 값, 북마크 여부 삽입 필요 */
+    public SimpleCafeResponse toSimpleCafeResponse() {
+        return SimpleCafeResponse.builder()
+                .id(id)
+                .title(title)
+                .mapUrl(naver_url)
+                .likeCount(like_count)
+                .preview("")
+                .isMarked(false)
+                .sido(cafeAddress.getSido())
+                .sigungu(toCafeResponse().getSigungu())
+                .eupmyun(cafeAddress.getEupmyun())
+                .dong(cafeAddress.getDong())
+                .doro(cafeAddress.getDoro())
+                .buildNo(cafeAddress.getBuild_no())
+                .branch(cafeAddress.getBranch())
+                .latitude(cafeAddress.getLatitude())
+                .longitude(cafeAddress.getLongitude())
+                .distance(0.0)
+                .build();
     }
 }

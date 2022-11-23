@@ -1,7 +1,8 @@
 package net.cafree.domain.cafe.dto.request;
 
 import lombok.*;
-
+import net.cafree.domain.cafe.entity.Cafe;
+import net.cafree.domain.cafe.entity.CafeAddress;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -32,4 +33,27 @@ public class CafeRegisterRequest {
 
     @NotNull
     private BigDecimal longitude;
+
+    public Cafe toCafeEntity(CafeAddress cafeAddress) {
+        return Cafe.builder()
+                .title(title)
+                .like_count(0)
+                .naver_url("")
+                .cafeAddress(cafeAddress)
+                .build();
+    }
+
+    public CafeAddress toCafeAddressEntity() {
+        return CafeAddress.builder()
+                .sido(sido)
+                .sigungu(sigungu)
+                .eupmyun(eupmyun)
+                .dong(dong)
+                .doro(doro)
+                .build_no(buildNo)
+                .branch(branch)
+                .latitude(latitude)
+                .longitude(longitude)
+                .build();
+    }
 }
