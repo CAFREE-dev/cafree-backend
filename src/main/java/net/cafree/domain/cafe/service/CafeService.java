@@ -44,8 +44,8 @@ public class CafeService {
         Cafe cafe = findById(id);
         cafe.updateCafe(
                 cafeUpdateRequest.getTitle(),
-                cafeUpdateRequest.getLike_count(),
-                cafeUpdateRequest.getNaver_url());
+                cafeUpdateRequest.getLikeCount(),
+                cafeUpdateRequest.getMapUrl());
         return cafe;
     }
 

@@ -29,7 +29,7 @@ public class CafeAddress {
     private String doro;
 
     @Column(length = 10)
-    private String build_no;
+    private String buildNo;
 
     @Column(length = 100)
     private String branch;
@@ -47,7 +47,7 @@ public class CafeAddress {
             String eupmyun,
             String dong,
             String doro,
-            String build_no,
+            String buildNo,
             String branch,
             BigDecimal latitude,
             BigDecimal longitude
@@ -57,7 +57,7 @@ public class CafeAddress {
         this.eupmyun = eupmyun;
         this.dong = dong;
         this.doro = doro;
-        this.build_no = build_no;
+        this.buildNo = buildNo;
         this.branch = branch;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -79,7 +79,7 @@ public class CafeAddress {
         this.eupmyun = eupmyun;
         this.dong = dong;
         this.doro = doro;
-        this.build_no = build_no;
+        this.buildNo = build_no;
         this.branch = branch;
         this.latitude = latitude;
         this.longitude = longitude;

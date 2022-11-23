@@ -17,16 +17,16 @@ public class Cafe {
     private String title;
 
     @Column(nullable = false)
-    private Integer like_count;
+    private Integer likeCount;
 
     @Column(length = 255, nullable = false)
-    private String naver_url;
+    private String mapUrl;
 
     /* 2022.11.15 - lcomment : 좋아요 수 Default값을 null이 아닌 0으로 지정 */
     @PrePersist
     private void prePersist() {
-        if(like_count == null){
-            like_count = 0;
+        if(likeCount == null){
+            likeCount = 0;
         }
     }
 
@@ -35,17 +35,17 @@ public class Cafe {
     private CafeAddress cafeAddress;
 
     @Builder
-    public Cafe(String title, int like_count, String naver_url, CafeAddress cafeAddress){
+    public Cafe(String title, int likeCount, String mapUrl, CafeAddress cafeAddress){
         this.title = title;
-        this.like_count = like_count;
-        this.naver_url = naver_url;
+        this.likeCount = likeCount;
+        this.mapUrl = mapUrl;
         this.cafeAddress = cafeAddress;
     }
 
     public void updateCafe(String title, Integer likeCount, String mapUrl) {
         this.title = title;
-        this.like_count = likeCount;
-        this.naver_url = mapUrl;
+        this.likeCount = likeCount;
+        this.mapUrl = mapUrl;
     }
 
     /* 2022.11.23 - rt3310 : User Entity가 구현되면 거리 계산 값, 북마크 여부 삽입 필요 */
@@ -53,8 +53,8 @@ public class Cafe {
         return CafeResponse.builder()
                 .id(id)
                 .title(title)
-                .mapUrl(naver_url)
-                .likeCount(like_count)
+                .mapUrl(mapUrl)
+                .likeCount(likeCount)
                 .preview("")
                 .isMarked(false)
                 .sido(cafeAddress.getSido())
@@ -62,7 +62,7 @@ public class Cafe {
                 .eupmyun(cafeAddress.getEupmyun())
                 .dong(cafeAddress.getDong())
                 .doro(cafeAddress.getDoro())
-                .buildNo(cafeAddress.getBuild_no())
+                .buildNo(cafeAddress.getBuildNo())
                 .branch(cafeAddress.getBranch())
                 .latitude(cafeAddress.getLatitude())
                 .longitude(cafeAddress.getLongitude())
@@ -75,8 +75,8 @@ public class Cafe {
         return SimpleCafeResponse.builder()
                 .id(id)
                 .title(title)
-                .mapUrl(naver_url)
-                .likeCount(like_count)
+                .mapUrl(mapUrl)
+                .likeCount(likeCount)
                 .preview("")
                 .isMarked(false)
                 .sido(cafeAddress.getSido())
@@ -84,7 +84,7 @@ public class Cafe {
                 .eupmyun(cafeAddress.getEupmyun())
                 .dong(cafeAddress.getDong())
                 .doro(cafeAddress.getDoro())
-                .buildNo(cafeAddress.getBuild_no())
+                .buildNo(cafeAddress.getBuildNo())
                 .branch(cafeAddress.getBranch())
                 .latitude(cafeAddress.getLatitude())
                 .longitude(cafeAddress.getLongitude())

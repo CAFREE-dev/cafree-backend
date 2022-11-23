@@ -13,9 +13,9 @@ public class CafeUpdateRequest {
     private String title;
 
     @NotNull
-    private Integer like_count;
+    private Integer likeCount;
 
-    private String naver_url;
+    private String mapUrl;
 
     private String sido;
 

@@ -37,8 +37,8 @@ public class CafeRegisterRequest {
     public Cafe toCafeEntity(CafeAddress cafeAddress) {
         return Cafe.builder()
                 .title(title)
-                .like_count(0)
-                .naver_url("")
+                .likeCount(0)
+                .mapUrl("")
                 .cafeAddress(cafeAddress)
                 .build();
     }
@@ -50,7 +50,7 @@ public class CafeRegisterRequest {
                 .eupmyun(eupmyun)
                 .dong(dong)
                 .doro(doro)
-                .build_no(buildNo)
+                .buildNo(buildNo)
                 .branch(branch)
                 .latitude(latitude)
                 .longitude(longitude)
