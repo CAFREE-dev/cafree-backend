@@ -47,8 +47,8 @@ class CafeServiceTest {
         CafeAddress mockCafeAddress = CafeAddress.builder().build();
         Cafe mockCafe = Cafe.builder()
                 .title(title)
-                .like_count(0)
-                .naver_url(mapUrl)
+                .likeCount(0)
+                .mapUrl(mapUrl)
                 .cafeAddress(mockCafeAddress)
                 .build();
         Long mockId = 1L;
@@ -67,7 +67,7 @@ class CafeServiceTest {
 
         assertThat(cafe.getId()).isEqualTo(mockId);
         assertThat(cafe.getTitle()).isEqualTo(title);
-        assertThat(cafe.getNaver_url()).isEqualTo(mapUrl);
+        assertThat(cafe.getMapUrl()).isEqualTo(mapUrl);
     }
 
     @Test
@@ -80,8 +80,8 @@ class CafeServiceTest {
         CafeAddress mockCafeAddress = CafeAddress.builder().build();
         Cafe mockCafe = Cafe.builder()
                 .title(title)
-                .like_count(0)
-                .naver_url(mapUrl)
+                .likeCount(0)
+                .mapUrl(mapUrl)
                 .cafeAddress(mockCafeAddress)
                 .build();
         Long mockId = 1L;
@@ -132,15 +132,15 @@ class CafeServiceTest {
 
         CafeUpdateRequest cafeUpdateRequest = CafeUpdateRequest.builder()
                 .title(updatedTitle)
-                .like_count(updatedLikeCount)
-                .naver_url(updatedMapUrl)
+                .likeCount(updatedLikeCount)
+                .mapUrl(updatedMapUrl)
                 .build();
         CafeAddress mockCafeAddress = CafeAddress.builder()
                 .build();
         Cafe mockCafe = Cafe.builder()
                 .title(title)
-                .like_count(0)
-                .naver_url(mapUrl)
+                .likeCount(0)
+                .mapUrl(mapUrl)
                 .cafeAddress(mockCafeAddress)
                 .build();
         Long mockId = 1L;
@@ -154,8 +154,8 @@ class CafeServiceTest {
 
         // then
         assertThat(updatedCafe.getTitle()).isEqualTo(updatedTitle);
-        assertThat(updatedCafe.getLike_count()).isEqualTo(updatedLikeCount);
-        assertThat(updatedCafe.getNaver_url()).isEqualTo(updatedMapUrl);
+        assertThat(updatedCafe.getLikeCount()).isEqualTo(updatedLikeCount);
+        assertThat(updatedCafe.getMapUrl()).isEqualTo(updatedMapUrl);
     }
 
     @Test
@@ -165,8 +165,8 @@ class CafeServiceTest {
         String mapUrl = "url1";
         Cafe mockCafe = Cafe.builder()
                 .title(title)
-                .like_count(0)
-                .naver_url(mapUrl)
+                .likeCount(0)
+                .mapUrl(mapUrl)
                 .cafeAddress(null)
                 .build();
         Long mockId = 1L;
@@ -186,8 +186,8 @@ class CafeServiceTest {
         String mapUrl = "url1";
         Cafe mockCafe = Cafe.builder()
                 .title(title)
-                .like_count(0)
-                .naver_url(mapUrl)
+                .likeCount(0)
+                .mapUrl(mapUrl)
                 .cafeAddress(null)
                 .build();
         Long mockId = 1L;
