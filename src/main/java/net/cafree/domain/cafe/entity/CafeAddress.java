@@ -1,7 +1,6 @@
-package net.cafree.domain.cafe.domain;
+package net.cafree.domain.cafe.entity;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -30,7 +29,7 @@ public class CafeAddress {
     private String doro;
 
     @Column(length = 10)
-    private String build_no;
+    private String buildNo;
 
     @Column(length = 100)
     private String branch;
@@ -48,6 +47,28 @@ public class CafeAddress {
             String eupmyun,
             String dong,
             String doro,
+            String buildNo,
+            String branch,
+            BigDecimal latitude,
+            BigDecimal longitude
+    ){
+        this.sido = sido;
+        this.sigungu = sigungu;
+        this.eupmyun = eupmyun;
+        this.dong = dong;
+        this.doro = doro;
+        this.buildNo = buildNo;
+        this.branch = branch;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public void updateCafeAddress(
+            String sido,
+            String sigungu,
+            String eupmyun,
+            String dong,
+            String doro,
             String build_no,
             String branch,
             BigDecimal latitude,
@@ -58,7 +79,7 @@ public class CafeAddress {
         this.eupmyun = eupmyun;
         this.dong = dong;
         this.doro = doro;
-        this.build_no = build_no;
+        this.buildNo = buildNo;
         this.branch = branch;
         this.latitude = latitude;
         this.longitude = longitude;

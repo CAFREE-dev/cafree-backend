@@ -1,6 +1,6 @@
-package net.cafree.domain.cafe.dao;
+package net.cafree.domain.cafe.repository;
 
-import net.cafree.domain.cafe.domain.Cafe;
+import net.cafree.domain.cafe.entity.Cafe;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

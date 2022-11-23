@@ -1,7 +1,6 @@
 package net.cafree.domain.cafe.dto.request;
 
 import lombok.*;
-
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -9,9 +8,14 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CafeRegisterRequestDto {
+public class CafeUpdateRequest {
     @NotNull
     private String title;
+
+    @NotNull
+    private Integer likeCount;
+
+    private String mapUrl;
 
     private String sido;
 

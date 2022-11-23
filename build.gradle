@@ -1,7 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-	id 'org.asciidoctor.convert' version '1.5.8'
+	id 'org.asciidoctor.convert' version '2.4.0'
 	id 'java'
 }
 
@@ -15,12 +15,9 @@ configurations {
 	}
 }
 
-repositories {
-	mavenCentral()
-}
-
-ext {
-	set('snippetsDir', file("build/generated-snippets"))
+/* 2022.11.23 - rt3310 : gradle build 시 test -> asciidoctor 로 실행되도록 설정 */
+asciidoctor {
+	dependsOn test
 }
 
 /* 2022.11.15 - lcomment : jar 파일로 만들 때 rest docs 가 해당 jar 파일에 들어가게끔 하기 위한 설정 */
@@ -30,6 +27,14 @@ bootJar {
 		from "${asciidoctor.outputDir}"
 		into 'BOOT-INF/classes/static/docs'
 	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('snippetsDir', file("build/generated-snippets"))
 }
 
 dependencies {
@@ -46,6 +51,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	testImplementation 'org.mockito:mockito-junit-jupiter'
 }
 
 tasks.named('test') {
