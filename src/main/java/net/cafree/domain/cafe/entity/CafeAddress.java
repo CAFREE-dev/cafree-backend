@@ -79,7 +79,7 @@ public class CafeAddress {
         this.eupmyun = eupmyun;
         this.dong = dong;
         this.doro = doro;
-        this.buildNo = build_no;
+        this.buildNo = buildNo;
         this.branch = branch;
         this.latitude = latitude;
         this.longitude = longitude;
