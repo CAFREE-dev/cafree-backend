@@ -6,40 +6,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
-@Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SimpleCafeResponse {
-    private Long id;
-
-    private String title;
-
-    private String mapUrl;
-
-    private Integer likeCount;
-
-    private String preview;
-
-    private Boolean isMarked;
-
-    private String sido;
-
-    private String sigungu;
-
-    private String eupmyun;
-
-    private String dong;
-
-    private String doro;
-
-    private String buildNo;
-
-    private String branch;
-
-    private BigDecimal latitude;
-
-    private BigDecimal longitude;
-
-    private Double distance;
+public record SimpleCafeResponse(Long id,
+                                 String title,
+                                 String mapUrl,
+                                 Integer likeCount,
+                                 String preview,
+                                 Boolean isMarked,
+                                 String sido,
+                                 String sigungu,
+                                 String eupmyun,
+                                 String dong,
+                                 String doro,
+                                 String buildNo,
+                                 String branch,
+                                 BigDecimal latitude,
+                                 BigDecimal longitude,
+                                 Double distance) {
 
     @Builder
     public SimpleCafeResponse(Long id,
