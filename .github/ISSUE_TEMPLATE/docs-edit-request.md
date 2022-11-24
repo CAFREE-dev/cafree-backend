@@ -1,5 +1,5 @@
 ---
-name: Docs Edit Request
+name: Docs edit request
 about: Describe this issue template's purpose here.
 title: ''
 labels: "✍️docs"
