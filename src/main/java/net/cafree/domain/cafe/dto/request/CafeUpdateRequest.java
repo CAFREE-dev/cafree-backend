@@ -4,7 +4,6 @@ import lombok.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-@Builder
 public record CafeUpdateRequest(@NotNull String title,
                                 @NotNull Integer likeCount,
                                 String mapUrl,
@@ -16,4 +15,8 @@ public record CafeUpdateRequest(@NotNull String title,
                                 String buildNo,
                                 String branch,
                                 @NotNull BigDecimal latitude,
-                                @NotNull BigDecimal longitude) {}
+                                @NotNull BigDecimal longitude) {
+
+    @Builder
+    public CafeUpdateRequest{}
+}

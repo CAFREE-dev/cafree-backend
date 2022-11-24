@@ -6,7 +6,6 @@ import net.cafree.domain.cafe.entity.CafeAddress;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-@Builder
 public record CafeRegisterRequest(@NotNull String title,
                                   String sido,
                                   String sigungu,
@@ -17,6 +16,9 @@ public record CafeRegisterRequest(@NotNull String title,
                                   String branch,
                                   @NotNull BigDecimal latitude,
                                   @NotNull BigDecimal longitude) {
+
+    @Builder
+    public CafeRegisterRequest{}
 
     public Cafe toCafeEntity(CafeAddress cafeAddress) {
         return Cafe.builder()
