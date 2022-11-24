@@ -6,33 +6,19 @@ import net.cafree.domain.cafe.entity.CafeAddress;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-@Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CafeRegisterRequest {
-    @NotNull
-    private String title;
+public record CafeRegisterRequest(@NotNull String title,
+                                  String sido,
+                                  String sigungu,
+                                  String eupmyun,
+                                  String dong,
+                                  String doro,
+                                  String buildNo,
+                                  String branch,
+                                  @NotNull BigDecimal latitude,
+                                  @NotNull BigDecimal longitude) {
 
-    private String sido;
-
-    private String sigungu;
-
-    private String eupmyun;
-
-    private String dong;
-
-    private String doro;
-
-    private String buildNo;
-
-    private String branch;
-
-    @NotNull
-    private BigDecimal latitude;
-
-    @NotNull
-    private BigDecimal longitude;
+    @Builder
+    public CafeRegisterRequest{}
 
     public Cafe toCafeEntity(CafeAddress cafeAddress) {
         return Cafe.builder()
