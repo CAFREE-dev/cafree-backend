@@ -1,7 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-	id 'org.asciidoctor.convert' version '2.4.0'
+	id 'org.asciidoctor.jvm.convert' version '3.3.2'
 	id 'java'
 }
 
@@ -15,32 +15,52 @@ configurations {
 	}
 }
 
+ext {
+	set('snippetsDir', file("build/generated-snippets"))
+}
+
+test {
+	useJUnitPlatform()
+}
+
 /* 2022.11.23 - rt3310 : gradle build 시 test -> asciidoctor 로 실행되도록 설정 */
 asciidoctor {
 	dependsOn test
 }
 
+/* 2022.11.24 - rt3310 : gradle build 시 생성 전 static/docs 파일 제거 */
+asciidoctor.doFirst {
+	delete file('src/main/resources/static/docs')
+}
+
 /* 2022.11.15 - lcomment : jar 파일로 만들 때 rest docs 가 해당 jar 파일에 들어가게끔 하기 위한 설정 */
 bootJar {
 	dependsOn asciidoctor
-	copy {
-		from "${asciidoctor.outputDir}"
+	from ("${asciidoctor.outputDir}/html5") {
 		into 'BOOT-INF/classes/static/docs'
 	}
+}
+
+task copyDocument(type: Copy) {
+	dependsOn asciidoctor
+
+	from file("build/docs/asciidoc")
+	into file("src/main/resources/static/docs")
+}
+
+build {
+	dependsOn copyDocument
 }
 
 repositories {
 	mavenCentral()
 }
 
-ext {
-	set('snippetsDir', file("build/generated-snippets"))
-}
-
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'junit:junit:4.13.2'
 
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -52,14 +72,4 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 	testImplementation 'org.mockito:mockito-junit-jupiter'
-}
-
-tasks.named('test') {
-	outputs.dir snippetsDir
-	useJUnitPlatform()
-}
-
-tasks.named('asciidoctor') {
-	inputs.dir snippetsDir
-	dependsOn test
 }
