@@ -43,23 +43,23 @@ public class CafeService {
     private Cafe updateCafe(Long id, CafeUpdateRequest cafeUpdateRequest) {
         Cafe cafe = findById(id);
         cafe.updateCafe(
-                cafeUpdateRequest.getTitle(),
-                cafeUpdateRequest.getLikeCount(),
-                cafeUpdateRequest.getMapUrl());
+                cafeUpdateRequest.title(),
+                cafeUpdateRequest.likeCount(),
+                cafeUpdateRequest.mapUrl());
         return cafe;
     }
 
     private void updateCafeAddress(CafeAddress cafeAddress, CafeUpdateRequest cafeUpdateRequest) {
         cafeAddress.updateCafeAddress(
-                cafeUpdateRequest.getSido(),
-                cafeUpdateRequest.getSigungu(),
-                cafeUpdateRequest.getEupmyun(),
-                cafeUpdateRequest.getDong(),
-                cafeUpdateRequest.getDoro(),
-                cafeUpdateRequest.getBuildNo(),
-                cafeUpdateRequest.getBranch(),
-                cafeUpdateRequest.getLatitude(),
-                cafeUpdateRequest.getLongitude());
+                cafeUpdateRequest.sido(),
+                cafeUpdateRequest.sigungu(),
+                cafeUpdateRequest.eupmyun(),
+                cafeUpdateRequest.dong(),
+                cafeUpdateRequest.doro(),
+                cafeUpdateRequest.buildNo(),
+                cafeUpdateRequest.branch(),
+                cafeUpdateRequest.latitude(),
+                cafeUpdateRequest.longitude());
     }
 
     @Transactional
