@@ -69,7 +69,7 @@ public class CafeAddress {
             String eupmyun,
             String dong,
             String doro,
-            String build_no,
+            String buildNo,
             String branch,
             BigDecimal latitude,
             BigDecimal longitude
