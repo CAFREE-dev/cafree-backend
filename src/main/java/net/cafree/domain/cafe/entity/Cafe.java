@@ -80,7 +80,7 @@ public class Cafe {
                 .preview("")
                 .isMarked(false)
                 .sido(cafeAddress.getSido())
-                .sigungu(toCafeResponse().sigungu())
+                .sigungu(cafeAddress.getSigungu())
                 .eupmyun(cafeAddress.getEupmyun())
                 .dong(cafeAddress.getDong())
                 .doro(cafeAddress.getDoro())
