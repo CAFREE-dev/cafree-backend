@@ -1,9 +1,6 @@
 package net.cafree.domain.cafe.dto.response;
 
-import lombok.AccessLevel;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 public record SimpleCafeResponse(Long id,
