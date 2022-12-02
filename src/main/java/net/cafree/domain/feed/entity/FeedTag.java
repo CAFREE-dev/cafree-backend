@@ -20,7 +20,7 @@ public class FeedTag {
     private Tag tag;
 
     @ManyToOne
-    @JoinColumn(name = "feed_id")
+    @JoinColumn(name = "feed_id", referencedColumnName = "id")
     private Feed feed;
 
 
