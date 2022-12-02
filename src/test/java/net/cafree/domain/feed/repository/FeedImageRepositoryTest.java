@@ -44,11 +44,13 @@ class FeedImageRepositoryTest {
     @DisplayName("피드 이미지 등록을 요청하면 새로운 피드 이미지가 등록된다")
     public void registerNewCafe(){
         // given
+        Integer seq = 1;
         String imageUrl = "https://image.cafree.net/v1/12345678";
-        FeedImage feedImage = feedImageRepository.save(new FeedImage(imageUrl, getSavedFeed()));
+        FeedImage feedImage = feedImageRepository.save(new FeedImage(imageUrl, getSavedFeed(), seq));
 
         // then
         assertThat(feedImage.getImageUrl()).isEqualTo(imageUrl);
+        assertThat(feedImage.getSequence()).isEqualTo(seq);
     }
 
     @Test
@@ -56,8 +58,8 @@ class FeedImageRepositoryTest {
     public void getAllFeed() {
         // given
         String imageUrl = "https://image.cafree.net/v1/12345678";
-        feedImageRepository.save(new FeedImage(imageUrl, getSavedFeed()));
-        feedImageRepository.save(new FeedImage(imageUrl, getSavedFeed()));
+        feedImageRepository.save(new FeedImage(imageUrl, getSavedFeed(), 1));
+        feedImageRepository.save(new FeedImage(imageUrl, getSavedFeed(), 2));
 
         // when
         List<FeedImage> feedImages = feedImageRepository.findAll();
@@ -71,6 +73,7 @@ class FeedImageRepositoryTest {
         return feedRepository.save(Feed.builder()
                 .contents(contents)
                 .cafe(getSavedCafe())
+                .likes(0)
                 .member(getSavedMember())
                 .build());
     }
