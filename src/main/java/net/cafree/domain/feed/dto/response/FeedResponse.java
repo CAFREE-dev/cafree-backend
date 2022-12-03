@@ -8,11 +8,12 @@ import java.util.List;
 public record FeedResponse(Long id,
                            LocalDateTime createdAt,
                            List<String> imageUrls,
+                           List<Integer> imageSequences,
                            List<String> tags,
                            Long cafeId,
                            String cafeTitle,
                            String cafePreview,
-                           Long likeCount,
+                           Double rating,
                            Boolean isLiked,
                            Long memberId,
                            String memberNickname) {
