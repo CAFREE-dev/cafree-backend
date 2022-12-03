@@ -24,7 +24,7 @@ public class Feed {
     private String contents;
 
     @Column
-    private Double likePoint;
+    private Double rating;
 
     @Embedded
     private BaseTime baseTime;
@@ -38,16 +38,16 @@ public class Feed {
     private Member member;
 
     @Builder
-    public Feed(String contents, Double likePoint, Cafe cafe, Member member) {
+    public Feed(String contents, Double rating, Cafe cafe, Member member) {
         this.contents = contents;
-        this.likePoint = likePoint;
+        this.rating = rating;
         this.cafe = cafe;
         this.member = member;
     }
 
-    public void updateFeed(String contents, Double likePoint, Cafe cafe) {
+    public void updateFeed(String contents, Double rating, Cafe cafe) {
         this.contents = contents;
-        this.likePoint = likePoint;
+        this.rating = rating;
         this.cafe = cafe;
     }
 
@@ -62,7 +62,7 @@ public class Feed {
                 .cafeId(cafe.getId())
                 .cafeTitle(cafe.getTitle())
                 .cafePreview("카페 간단 소개글입니다")
-                .likeCount(likePoint)
+                .rating(rating)
                 .isLiked(false)
                 .memberId(1L)
                 .memberNickname("test")
