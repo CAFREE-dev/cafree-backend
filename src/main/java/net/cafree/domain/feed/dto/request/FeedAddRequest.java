@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record FeedAddRequest(String contents,
-                             Integer likes,
+                             Double likePoint,
                              List<String> imageUrls,
                              List<Integer> imageSequences,
                              List<String> tags,
@@ -23,7 +23,7 @@ public record FeedAddRequest(String contents,
     public Feed toFeedEntity(Cafe cafe, Member member){
         return Feed.builder()
                 .contents(contents)
-                .likes(likes)
+                .likePoint(likePoint)
                 .cafe(cafe)
                 .member(member)
                 .build();

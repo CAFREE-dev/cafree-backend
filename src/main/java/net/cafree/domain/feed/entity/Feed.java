@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import net.cafree.domain.cafe.entity.Cafe;
 import net.cafree.domain.feed.dto.response.FeedResponse;
-import net.cafree.domain.feed.dto.response.SimpleFeedResponse;
 import net.cafree.domain.member.entity.Member;
 import net.cafree.global.BaseTime;
 
@@ -25,7 +24,7 @@ public class Feed {
     private String contents;
 
     @Column
-    private Integer likes;
+    private Double likePoint;
 
     @Embedded
     private BaseTime baseTime;
@@ -39,16 +38,16 @@ public class Feed {
     private Member member;
 
     @Builder
-    public Feed(String contents, Integer likes, Cafe cafe, Member member) {
+    public Feed(String contents, Double likePoint, Cafe cafe, Member member) {
         this.contents = contents;
-        this.likes = likes;
+        this.likePoint = likePoint;
         this.cafe = cafe;
         this.member = member;
     }
 
-    public void updateFeed(String contents, Integer likes, Cafe cafe) {
+    public void updateFeed(String contents, Double likePoint, Cafe cafe) {
         this.contents = contents;
-        this.likes = likes;
+        this.likePoint = likePoint;
         this.cafe = cafe;
     }
 
@@ -63,7 +62,7 @@ public class Feed {
                 .cafeId(cafe.getId())
                 .cafeTitle(cafe.getTitle())
                 .cafePreview("카페 간단 소개글입니다")
-                .likeCount(likes)
+                .likeCount(likePoint)
                 .isLiked(false)
                 .memberId(1L)
                 .memberNickname("test")
