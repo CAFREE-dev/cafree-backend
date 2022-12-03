@@ -5,7 +5,7 @@ import lombok.Builder;
 import java.util.List;
 
 public record FeedUpdateRequest(String contents,
-                                Double likePoint,
+                                Double rating,
                                 List<String> tags,
                                 Long cafeId) {
 

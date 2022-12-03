@@ -44,7 +44,7 @@ class FeedRepositoryTest {
         String contents = "피드입니다.";
         Feed savedFeed = feedRepository.save(Feed.builder()
                 .contents(contents)
-                .likePoint(2.5)
+                .rating(2.5)
                 .cafe(getSavedCafe())
                 .member(getSavedMember())
                 .build());
@@ -60,13 +60,13 @@ class FeedRepositoryTest {
         String contents = "피드입니다.";
         feedRepository.save(Feed.builder()
                 .contents(contents)
-                .likePoint(2.5)
+                .rating(2.5)
                 .cafe(getSavedCafe())
                 .member(getSavedMember())
                 .build());
         feedRepository.save(Feed.builder()
                 .contents(contents)
-                .likePoint(3.5)
+                .rating(3.5)
                 .cafe(getSavedCafe())
                 .member(getSavedMember())
                 .build());

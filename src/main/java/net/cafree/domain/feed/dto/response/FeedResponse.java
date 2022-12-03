@@ -13,7 +13,7 @@ public record FeedResponse(Long id,
                            Long cafeId,
                            String cafeTitle,
                            String cafePreview,
-                           Double likeCount,
+                           Double rating,
                            Boolean isLiked,
                            Long memberId,
                            String memberNickname) {

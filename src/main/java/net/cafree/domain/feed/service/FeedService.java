@@ -28,7 +28,7 @@ public class FeedService {
         Feed feed = findById(id);
         feed.updateFeed(
                 feedUpdateRequest.contents(),
-                feedUpdateRequest.likePoint(),
+                feedUpdateRequest.rating(),
                 cafe);
         return feed;
     }
