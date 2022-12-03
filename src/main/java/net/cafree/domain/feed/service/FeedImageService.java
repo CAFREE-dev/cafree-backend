@@ -34,7 +34,7 @@ public class FeedImageService {
     }
 
     public List<FeedImage> findByFeedId(Long feedId){
-        return feedImageRepository.findByFeed_Id(feedId);
+        return feedImageRepository.findByFeedId(feedId);
     }
 
     @Transactional
