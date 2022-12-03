@@ -73,7 +73,7 @@ class FeedImageRepositoryTest {
         return feedRepository.save(Feed.builder()
                 .contents(contents)
                 .cafe(getSavedCafe())
-                .likes(0)
+                .likePoint(2.5)
                 .member(getSavedMember())
                 .build());
     }
