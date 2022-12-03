@@ -41,15 +41,9 @@ public class FeedController {
                 .map(FeedTag::getTag).toList();
 
         return ResponseEntity.ok(feed.toFeedResponse(
-                feedImages.stream()
-                        .map(FeedImage::getImageUrl)
-                        .collect(Collectors.toList()),
-                feedImages.stream()
-                        .map(FeedImage::getSequence)
-                        .collect(Collectors.toList()),
-                tags.stream()
-                        .map(Tag::getTagName)
-                        .collect(Collectors.toList())));
+                getImageUrls(feedImages),
+                getImageSequences(feedImages),
+                getTagNames(tags)));
     }
 
     @GetMapping
@@ -71,15 +65,9 @@ public class FeedController {
         feedTagService.saveAll(feed, tags);
 
         return ResponseEntity.ok(feed.toFeedResponse(
-                feedImages.stream()
-                        .map(FeedImage::getImageUrl)
-                        .collect(Collectors.toList()),
-                feedImages.stream()
-                        .map(FeedImage::getSequence)
-                        .collect(Collectors.toList()),
-                tags.stream()
-                        .map(Tag::getTagName)
-                        .collect(Collectors.toList())));
+                getImageUrls(feedImages),
+                getImageSequences(feedImages),
+                getTagNames(tags)));
     }
 
     @PutMapping("/{id}")
@@ -93,15 +81,9 @@ public class FeedController {
                 .map(FeedTag::getTag).toList();
 
         return ResponseEntity.ok(feed.toFeedResponse(
-                feedImages.stream()
-                        .map(FeedImage::getImageUrl)
-                        .collect(Collectors.toList()),
-                feedImages.stream()
-                        .map(FeedImage::getSequence)
-                        .collect(Collectors.toList()),
-                tags.stream()
-                        .map(Tag::getTagName)
-                        .collect(Collectors.toList())));
+                getImageUrls(feedImages),
+                getImageSequences(feedImages),
+                getTagNames(tags)));
     }
 
     @DeleteMapping("/{id}")
@@ -111,5 +93,23 @@ public class FeedController {
         feedTagService.deleteAll(id);
 
         return ResponseEntity.ok().build();
+    }
+
+    private List<String> getImageUrls(List<FeedImage> feedImages) {
+        return feedImages.stream()
+                .map(FeedImage::getImageUrl)
+                .collect(Collectors.toList());
+    }
+
+    private List<Integer> getImageSequences(List<FeedImage> feedImages) {
+        return feedImages.stream()
+                .map(FeedImage::getSequence)
+                .collect(Collectors.toList());
+    }
+
+    private List<String> getTagNames(List<Tag> tags) {
+        return tags.stream()
+                .map(Tag::getTagName)
+                .collect(Collectors.toList());
     }
 }
