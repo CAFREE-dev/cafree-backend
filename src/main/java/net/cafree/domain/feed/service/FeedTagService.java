@@ -1,7 +1,6 @@
 package net.cafree.domain.feed.service;
 
 import lombok.RequiredArgsConstructor;
-import net.cafree.domain.feed.dto.request.FeedUpdateRequest;
 import net.cafree.domain.feed.entity.Feed;
 import net.cafree.domain.feed.entity.FeedTag;
 import net.cafree.domain.feed.entity.Tag;
@@ -10,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,13 +19,9 @@ public class FeedTagService {
 
     @Transactional
     public List<FeedTag> saveAll(Feed feed, List<Tag> tags) {
-        List<FeedTag> feedTags = new ArrayList<>();
-
-        for(Tag tag : tags){
-            feedTags.add(new FeedTag(tag, feed));
-        }
-
-        return feedTagRepository.saveAll(feedTags);
+        return feedTagRepository.saveAll(tags.stream()
+                .map(tag -> new FeedTag(tag, feed))
+                .collect(Collectors.toList()));
     }
 
     public List<FeedTag> findByFeed(Feed feed){
@@ -34,7 +29,7 @@ public class FeedTagService {
     }
 
     public List<FeedTag> findByFeedId(Long feedId){
-        return feedTagRepository.findByFeed_Id(feedId);
+        return feedTagRepository.findByFeedId(feedId);
     }
 
     public FeedTag findById(Long id) {
