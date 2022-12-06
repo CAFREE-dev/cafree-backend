@@ -8,6 +8,7 @@ import net.cafree.domain.cafe.entity.Cafe;
 import net.cafree.domain.feed.dto.response.FeedResponse;
 import net.cafree.domain.member.entity.Member;
 import net.cafree.global.BaseTime;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 public class Feed {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +45,7 @@ public class Feed {
         this.rating = rating;
         this.cafe = cafe;
         this.member = member;
+        this.baseTime = new BaseTime();
     }
 
     public void updateFeed(String contents, Double rating, Cafe cafe) {
