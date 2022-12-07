@@ -252,7 +252,7 @@ public class FeedControllerTest {
                 .cafe(cafe)
                 .member(null)
                 .build();
-        Long mockId = 1L;
+        Long mockId1 = 1L;
 
         List<FeedImage> mockFeedImages = List.of(
                 new FeedImage(imageUrls.get(0), feed, 1),
@@ -267,11 +267,42 @@ public class FeedControllerTest {
                 new FeedTag(mockTags.get(1), feed),
                 new FeedTag(mockTags.get(2), feed));
 
+        String contents2 = "매장이 깔끔하고 좋네요";
+        Double rating2 = 3.5;
+        List<String> imageUrls2 = List.of(
+                "https://image.cafree.net/v1/feed/2/1.png",
+                "https://image.cafree.net/v1/feed/2/2.png",
+                "https://image.cafree.net/v1/feed/2/3.png");
+        List<Integer> imageSequences2 = List.of(1, 2, 3);
+        List<String> tags2 = List.of("안양 카페", "안양역 카페", "안양 스타벅스");
+
+        Feed feed2 = Feed.builder()
+                .contents(contents2)
+                .rating(rating2)
+                .cafe(cafe)
+                .member(null)
+                .build();
+        Long mockId2 = 2L;
+
+        List<FeedImage> mockFeedImages2 = List.of(
+                new FeedImage(imageUrls2.get(0), feed2, 1),
+                new FeedImage(imageUrls2.get(1), feed2, 2),
+                new FeedImage(imageUrls2.get(2), feed2, 3));
+        List<Tag> mockTags2 = List.of(
+                new Tag(tags.get(0)),
+                new Tag(tags.get(1)),
+                new Tag(tags.get(2)));
+        List<FeedTag> mockFeedTags2 = List.of(
+                new FeedTag(mockTags.get(0), feed2),
+                new FeedTag(mockTags.get(1), feed2),
+                new FeedTag(mockTags.get(2), feed2));
+
         ReflectionTestUtils.setField(cafe, "id", cafeId);
-        ReflectionTestUtils.setField(feed, "id", mockId);
+        ReflectionTestUtils.setField(feed, "id", mockId1);
+        ReflectionTestUtils.setField(feed2, "id", mockId2);
 
         given(feedImageService.findFirstImage())
-                .willReturn(mockFeedImages);
+                .willReturn(List.of(mockFeedImages.get(0), mockFeedImages2.get(0)));
 
         // when
         ResultActions result = this.mockMvc.perform(
