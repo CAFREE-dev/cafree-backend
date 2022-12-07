@@ -34,7 +34,7 @@ public class FeedImage {
 
     public SimpleFeedResponse toSimpleFeedResponse(){
         return SimpleFeedResponse.builder()
-                .id(id)
+                .id(feed.getId())
                 .cafeId(feed.getCafe().getId())
                 .imageUrl(imageUrl)
                 .memberId(1L)
