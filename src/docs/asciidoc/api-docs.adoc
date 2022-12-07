@@ -79,3 +79,45 @@ include::{snippets}/cafe-remove/path-parameters.adoc[]
 === Response
 
 include::{snippets}/cafe-remove/http-response.adoc[]
+
+== 피드 등록
+
+=== Request
+
+include::{snippets}/feed-add/http-request.adoc[]
+
+include::{snippets}/feed-add/path-parameters.adoc[]
+
+include::{snippets}/feed-add/request-fields.adoc[]
+
+=== Response
+
+include::{snippets}/feed-add/http-response.adoc[]
+
+include::{snippets}/feed-add/response-fields.adoc[]
+
+== 피드 상세 조회
+
+=== Request
+
+include::{snippets}/feed-details/http-request.adoc[]
+
+include::{snippets}/feed-details/path-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/feed-details/http-response.adoc[]
+
+include::{snippets}/feed-details/response-fields.adoc[]
+
+== 피드 다중 조회
+
+=== Request
+
+include::{snippets}/feed-list/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/feed-list/http-response.adoc[]
+
+include::{snippets}/feed-list/response-fields.adoc[]
