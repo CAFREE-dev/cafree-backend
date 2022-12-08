@@ -17,7 +17,18 @@ public class Tag {
     @Column(length = 30, nullable = false)
     private String tagName;
 
-    public Tag(String tagName) {
+    private Integer taggedCount;
+
+    public Tag(String tagName, Integer taggedCount) {
         this.tagName = tagName;
+        this.taggedCount = taggedCount;
+    }
+
+    public void addCount(int count) {
+        this.taggedCount += count;
+    }
+
+    public void subtractCount(int count) {
+        this.taggedCount -= count;
     }
 }
