@@ -64,9 +64,9 @@ public class FeedTagServiceTest {
         // given
         Feed mockFeed = getSavedFeed();
         List<Tag> mockTags = List.of(
-                new Tag("안양 카페"),
-                new Tag("안양역 카페"),
-                new Tag("안양 스타벅스"));
+                new Tag("안양 카페", 0),
+                new Tag("안양역 카페", 0),
+                new Tag("안양 스타벅스", 0));
         List<FeedTag> mockFeedTags = List.of(
                 new FeedTag(mockTags.get(0), mockFeed),
                 new FeedTag(mockTags.get(1), mockFeed),
@@ -88,7 +88,7 @@ public class FeedTagServiceTest {
         // given
         Feed mockFeed = getSavedFeed();
         String tagName = "안양 스타벅스";
-        Tag mockTag = new Tag(tagName);
+        Tag mockTag = new Tag(tagName, 0);
         FeedTag mockFeedTag = new FeedTag(mockTag, mockFeed);
         Long mockId = 1L;
 
@@ -111,9 +111,9 @@ public class FeedTagServiceTest {
         // given
         Feed mockFeed = getSavedFeed();
         List<Tag> mockTags = List.of(
-                new Tag("안양 카페"),
-                new Tag("안양역 카페"),
-                new Tag("안양 스타벅스"));
+                new Tag("안양 카페", 0),
+                new Tag("안양역 카페", 0),
+                new Tag("안양 스타벅스", 0));
         List<FeedTag> mockFeedTags = List.of(
                 new FeedTag(mockTags.get(0), mockFeed),
                 new FeedTag(mockTags.get(1), mockFeed),
@@ -137,9 +137,9 @@ public class FeedTagServiceTest {
         // given
         Feed mockFeed = getSavedFeed();
         List<Tag> mockTags = List.of(
-                new Tag("안양 카페"),
-                new Tag("안양역 카페"),
-                new Tag("안양 스타벅스"));
+                new Tag("안양 카페", 0),
+                new Tag("안양역 카페", 0),
+                new Tag("안양 스타벅스", 0));
         List<FeedTag> mockFeedTags = List.of(
                 new FeedTag(mockTags.get(0), mockFeed),
                 new FeedTag(mockTags.get(1), mockFeed),
@@ -162,9 +162,9 @@ public class FeedTagServiceTest {
         // given
         Feed mockFeed = getSavedFeed();
         List<Tag> mockTags = List.of(
-                new Tag("안양 카페"),
-                new Tag("안양역 카페"),
-                new Tag("안양 스타벅스"));
+                new Tag("안양 카페", 0),
+                new Tag("안양역 카페", 0),
+                new Tag("안양 스타벅스", 0));
         List<FeedTag> mockFeedTags = List.of(
                 new FeedTag(mockTags.get(0), mockFeed),
                 new FeedTag(mockTags.get(1), mockFeed),
