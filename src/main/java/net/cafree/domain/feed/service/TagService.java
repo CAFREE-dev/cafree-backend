@@ -18,32 +18,45 @@ public class TagService {
     private final TagRepository tagRepository;
 
     @Transactional
-    public List<Tag> saveAll(FeedAddRequest feedAddRequest){
+    public List<Tag> saveAll(FeedAddRequest feedAddRequest) {
         return feedAddRequest.tags().stream()
                 .map(this::getSavedTag)
                 .collect(Collectors.toList());
     }
 
     private Tag getSavedTag(String tagName) {
-        return findByTagName(tagName)
-                .orElseGet(() -> tagRepository.save(new Tag(tagName)));
+        Optional<Tag> tagByTagName = findByTagName(tagName);
 
+        if (tagByTagName.isEmpty()) {
+            return tagRepository.save(new Tag(tagName, 1));
+        }
+
+        upTaggedCount(tagByTagName.get());
+        return tagByTagName.get();
     }
 
-    public List<Tag> findByIds(List<Long> ids){
+    private void upTaggedCount(Tag tag) {
+        tag.addCount(1);
+    }
+
+    public List<Tag> findByIds(List<Long> ids) {
         return tagRepository.findByIdIn(ids);
     }
 
 
-    public Tag findById(Long id){
+    public Tag findById(Long id) {
         return tagRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    public Optional<Tag> findByTagName(String tagName){
+    public Optional<Tag> findByTagName(String tagName) {
         return tagRepository.findByTagName(tagName);
     }
 
-    public List<Tag> findAll(){
+    public List<Tag> findAll() {
         return tagRepository.findAll();
+    }
+
+    public void delete(Tag tag) {
+        tagRepository.delete(tag);
     }
 }
