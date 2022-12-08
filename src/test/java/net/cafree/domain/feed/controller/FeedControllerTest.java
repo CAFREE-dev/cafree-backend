@@ -96,9 +96,9 @@ public class FeedControllerTest {
                 new FeedImage(imageUrls.get(1), feed, 2),
                 new FeedImage(imageUrls.get(2), feed, 3));
         List<Tag> mockTags = List.of(
-                new Tag(tags.get(0)),
-                new Tag(tags.get(1)),
-                new Tag(tags.get(2)));
+                new Tag(tags.get(0), 0),
+                new Tag(tags.get(1), 0),
+                new Tag(tags.get(2), 0));
 
         ReflectionTestUtils.setField(cafe, "id", cafeId);
         ReflectionTestUtils.setField(feed, "id", mockId);
@@ -183,9 +183,9 @@ public class FeedControllerTest {
                 new FeedImage(imageUrls.get(1), feed, 2),
                 new FeedImage(imageUrls.get(2), feed, 3));
         List<Tag> mockTags = List.of(
-                new Tag(tags.get(0)),
-                new Tag(tags.get(1)),
-                new Tag(tags.get(2)));
+                new Tag(tags.get(0), 0),
+                new Tag(tags.get(1), 0),
+                new Tag(tags.get(2), 0));
         List<FeedTag> mockFeedTags = List.of(
                 new FeedTag(mockTags.get(0), feed),
                 new FeedTag(mockTags.get(1), feed),
@@ -259,9 +259,9 @@ public class FeedControllerTest {
                 new FeedImage(imageUrls.get(1), feed, 2),
                 new FeedImage(imageUrls.get(2), feed, 3));
         List<Tag> mockTags = List.of(
-                new Tag(tags.get(0)),
-                new Tag(tags.get(1)),
-                new Tag(tags.get(2)));
+                new Tag(tags.get(0), 0),
+                new Tag(tags.get(1), 0),
+                new Tag(tags.get(2), 0));
         List<FeedTag> mockFeedTags = List.of(
                 new FeedTag(mockTags.get(0), feed),
                 new FeedTag(mockTags.get(1), feed),
@@ -289,9 +289,9 @@ public class FeedControllerTest {
                 new FeedImage(imageUrls2.get(1), feed2, 2),
                 new FeedImage(imageUrls2.get(2), feed2, 3));
         List<Tag> mockTags2 = List.of(
-                new Tag(tags.get(0)),
-                new Tag(tags.get(1)),
-                new Tag(tags.get(2)));
+                new Tag(tags.get(0), 0),
+                new Tag(tags.get(1), 0),
+                new Tag(tags.get(2), 0));
         List<FeedTag> mockFeedTags2 = List.of(
                 new FeedTag(mockTags.get(0), feed2),
                 new FeedTag(mockTags.get(1), feed2),
