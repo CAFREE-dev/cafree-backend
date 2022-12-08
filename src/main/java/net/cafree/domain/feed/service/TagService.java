@@ -39,6 +39,17 @@ public class TagService {
         tag.addCount(1);
     }
 
+    public void downTaggedCountOrDelete(List<Tag> tags) {
+        tags.stream()
+                .filter(tag -> downTaggedCount(tag) == 0)
+                .forEach(this::delete);
+    }
+
+    private Integer downTaggedCount(Tag tag) {
+        tag.subtractCount(1);
+        return tag.getTaggedCount();
+    }
+
     public List<Tag> findByIds(List<Long> ids) {
         return tagRepository.findByIdIn(ids);
     }
