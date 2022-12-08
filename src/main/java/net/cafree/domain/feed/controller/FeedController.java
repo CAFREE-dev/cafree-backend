@@ -15,7 +15,6 @@ import net.cafree.domain.feed.service.FeedImageService;
 import net.cafree.domain.feed.service.FeedService;
 import net.cafree.domain.feed.service.FeedTagService;
 import net.cafree.domain.feed.service.TagService;
-import net.cafree.domain.member.entity.Member;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -55,10 +54,7 @@ public class FeedController {
 
     @PostMapping
     public ResponseEntity<FeedResponse> feedAdd(@RequestBody @Validated FeedAddRequest feedAddRequest){
-        Cafe cafe = cafeService.findById(feedAddRequest.cafeId());
-        Member member = null;
-
-        Feed feed = feedService.save(feedAddRequest, cafe, member);
+        Feed feed = feedService.save(feedAddRequest, cafeService.findById(feedAddRequest.cafeId()), null);
         List<FeedImage> feedImages = feedImageService.saveAll(feedAddRequest, feed);
         List<Tag> tags = tagService.saveAll(feedAddRequest);
 
@@ -88,9 +84,9 @@ public class FeedController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> feedRemove(@PathVariable Long id) {
-        Feed feed = feedService.findById(id);
         feedImageService.deleteAll(id);
-        feedTagService.deleteAll(id);
+        tagService.downTaggedCountOrDelete(feedTagService.deleteAll(id));
+        feedService.delete(feedService.findById(id));
 
         return ResponseEntity.ok().build();
     }
