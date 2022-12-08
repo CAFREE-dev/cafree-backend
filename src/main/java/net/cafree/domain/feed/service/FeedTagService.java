@@ -24,11 +24,11 @@ public class FeedTagService {
                 .collect(Collectors.toList()));
     }
 
-    public List<FeedTag> findByFeed(Feed feed){
+    public List<FeedTag> findByFeed(Feed feed) {
         return feedTagRepository.findByFeed(feed);
     }
 
-    public List<FeedTag> findByFeedId(Long feedId){
+    public List<FeedTag> findByFeedId(Long feedId) {
         return feedTagRepository.findByFeedId(feedId);
     }
 
@@ -37,7 +37,16 @@ public class FeedTagService {
     }
 
     @Transactional
-    public void deleteAll(Long id) {
-        feedTagRepository.deleteAll(findByFeedId(id));
+    public List<Tag> deleteAll(Long feedId) {
+        List<FeedTag> feedTags = findByFeedId(feedId);
+        List<Tag> tags = getTags(feedTags);
+
+        feedTagRepository.deleteAll(feedTags);
+
+        return tags;
+    }
+
+    private List<Tag> getTags(List<FeedTag> feedTags) {
+        return feedTags.stream().map(FeedTag::getTag).toList();
     }
 }
