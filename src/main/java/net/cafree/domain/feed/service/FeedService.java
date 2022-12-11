@@ -24,7 +24,7 @@ public class FeedService {
     }
 
     @Transactional
-    public Feed update(Long id, FeedUpdateRequest feedUpdateRequest, Cafe cafe){
+    public Feed update(Long id, FeedUpdateRequest feedUpdateRequest, Cafe cafe) {
         Feed feed = findById(id);
         feed.updateFeed(
                 feedUpdateRequest.contents(),
@@ -33,16 +33,16 @@ public class FeedService {
         return feed;
     }
 
-    @Transactional
-    public void delete(Long id) {
-        feedRepository.delete(findById(id));
-    }
-
     public Feed findById(Long id) {
         return feedRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public List<Feed> findAll() {
         return feedRepository.findAll();
+    }
+
+    @Transactional
+    public void delete(Feed feed) {
+        feedRepository.delete(feed);
     }
 }

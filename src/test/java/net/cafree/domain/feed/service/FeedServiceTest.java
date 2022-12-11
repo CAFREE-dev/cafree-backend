@@ -174,7 +174,7 @@ public class FeedServiceTest {
 
         // then
         assertThatNoException()
-                .isThrownBy(() -> feedService.delete(mockId));
+                .isThrownBy(() -> feedService.delete(feedService.findById(mockId)));
     }
 
     @Test
@@ -199,7 +199,7 @@ public class FeedServiceTest {
                 .willReturn(Optional.of(mockFeed));
 
         // then
-        assertThatThrownBy(() -> feedService.delete(2L));
+        assertThatThrownBy(() -> feedService.delete(feedService.findById(2L)));
     }
 
     private Member getSavedMember() {

@@ -20,7 +20,7 @@ public record FeedAddRequest(String contents,
     @Builder
     public FeedAddRequest { }
 
-    public Feed toFeedEntity(Cafe cafe, Member member){
+    public Feed toFeedEntity(Cafe cafe, Member member) {
         return Feed.builder()
                 .contents(contents)
                 .rating(rating)
@@ -32,19 +32,15 @@ public record FeedAddRequest(String contents,
     public List<FeedImage> toFeedImageEntity(Feed feed) {
         List<FeedImage> feedImages = new ArrayList<>();
 
-        for(int i=0 ; i<imageSequences.size() ; i++){
+        for(int i=0 ; i<imageSequences.size() ; i++) {
             feedImages.add(new FeedImage(imageUrls.get(i), feed, imageSequences.get(i)));
         }
 
         return feedImages;
     }
 
-    public Tag toTagEntity(String tagName) {
-        return new Tag(tagName);
-    }
-
     /* 2022.11.28 - lcomment : User 기능 구현 후 수정 필요 */
-    public Member toMemberEntity(){
+    public Member toMemberEntity() {
         return null;
     }
 }

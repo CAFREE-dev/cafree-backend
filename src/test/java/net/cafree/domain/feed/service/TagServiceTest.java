@@ -20,13 +20,16 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import javax.persistence.EntityNotFoundException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class TagServiceTest {
@@ -63,7 +66,7 @@ public class TagServiceTest {
         String tag2 = "안양일번가 카페";
         String tag3 = "안양 카페";
 
-        Tag mockTag = new Tag("mock Tag");
+        Tag mockTag = new Tag("mock Tag", 0);
 
         FeedAddRequest feedAddRequest = FeedAddRequest.builder()
                 .tags(List.of(tag1, tag2, tag3))
@@ -80,6 +83,28 @@ public class TagServiceTest {
     }
 
     @Test
+    @DisplayName("이미 존재하는 태그의 저장을 요청하면 카운트가 올라간다")
+    public void saveExistTag() {
+        // given
+        Feed feed = getSavedFeed();
+        String tagName = "스타벅스";
+        Tag mockTag = new Tag(tagName, 1);
+
+        FeedAddRequest feedAddRequest = FeedAddRequest.builder()
+                .tags(List.of(tagName))
+                .build();
+
+        given(tagRepository.findByTagName(tagName))
+                .willReturn(Optional.of(mockTag));
+
+        // when
+        List<Tag> savedTags = tagService.saveAll(feedAddRequest);
+
+        // then
+        assertThat(savedTags.get(0).getTaggedCount()).isEqualTo(2);
+    }
+
+    @Test
     @DisplayName("id에 해당하는 태그를 리턴한다")
     public void findById() {
         // given
@@ -88,7 +113,7 @@ public class TagServiceTest {
         String tag2 = "안양일번가 카페";
         String tag3 = "안양 카페";
 
-        Tag mockTag = new Tag(tag1);
+        Tag mockTag = new Tag(tag1, 0);
         FeedAddRequest feedAddRequest = FeedAddRequest.builder()
                 .tags(List.of(tag1, tag2, tag3))
                 .build();
@@ -114,7 +139,7 @@ public class TagServiceTest {
     @DisplayName("모든 태그를 리턴한다")
     public void findAll() {
         // given
-        List<Tag> mockTags = List.of(new Tag("tag1"), new Tag("tag2"), new Tag("tag3"));
+        List<Tag> mockTags = List.of(new Tag("tag1", 0), new Tag("tag2", 0), new Tag("tag3", 0));
         given(tagRepository.findAll())
                 .willReturn(mockTags);
 
@@ -129,7 +154,7 @@ public class TagServiceTest {
     @DisplayName("id 리스트에 포함돼있는 태그 리스트를 리턴한다")
     public void findByIds() {
         // given
-        List<Tag> mockTags = List.of(new Tag("tag1"), new Tag("tag2"), new Tag("tag3"));
+        List<Tag> mockTags = List.of(new Tag("tag1", 0), new Tag("tag2", 0), new Tag("tag3", 0));
         List<Long> idList = List.of(1L, 2L);
         given(tagRepository.findByIdIn(idList))
                 .willReturn(List.of(mockTags.get(0), mockTags.get(2)));
@@ -139,6 +164,55 @@ public class TagServiceTest {
 
         // then
         assertThat(tags.size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("성공적으로 태그가 삭제되면 예외가 발생하지 않는다")
+    public void deleteTagByExistTag() {
+        String tagName = "태그이름";
+        Tag tag = new Tag(tagName, 0);
+        Long mockId = 1L;
+
+        given(tagRepository.findById(mockId))
+                .willReturn(Optional.of(tag));
+
+        assertThatNoException()
+                .isThrownBy(() -> tagService.delete(tagService.findById(mockId)));
+    }
+
+    @Test
+    @DisplayName("성공적으로 태그가 삭제되지 않으면 예외가 발생한다")
+    public void deleteTagByNotExistTag() {
+        Long mockId = 1L;
+
+        assertThatThrownBy(() -> tagService.delete(tagService.findById(mockId)))
+                .isInstanceOf(EntityNotFoundException.class);
+    }
+
+    @Test
+    @DisplayName("태그 카운트를 하나씩 감소시킨다")
+    public void downTagCount() {
+        List<Tag> mockTags = List.of(new Tag("tag1", 2), new Tag("tag2", 3), new Tag("tag3", 4));
+        given(tagRepository.findAll())
+                .willReturn(mockTags);
+
+        tagService.downTaggedCountOrDelete(tagService.findAll());
+
+        assertThat(mockTags.get(0).getTaggedCount()).isEqualTo(1);
+        assertThat(mockTags.get(1).getTaggedCount()).isEqualTo(2);
+        assertThat(mockTags.get(2).getTaggedCount()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("태그 카운트가 0이되면 삭제시킨다")
+    public void deleteTagByZeroTaggedCount() {
+        List<Tag> mockTags = List.of(new Tag("tag1", 1), new Tag("tag2", 1));
+        given(tagRepository.findAll())
+                .willReturn(mockTags);
+
+        tagService.downTaggedCountOrDelete(tagService.findAll());
+
+        verify(tagRepository, times(2)).delete(any());
     }
 
     private Feed getSavedFeed() {

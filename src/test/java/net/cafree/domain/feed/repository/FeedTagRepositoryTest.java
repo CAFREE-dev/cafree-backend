@@ -70,7 +70,7 @@ class FeedTagRepositoryTest {
     }
 
     private Tag getSavedTag(String tag) {
-        return tagRepository.save(new Tag(tag));
+        return tagRepository.save(new Tag(tag, 0));
     }
 
     private Feed getSavedFeed() {
@@ -89,7 +89,7 @@ class FeedTagRepositoryTest {
         String sigungu = "안양시 만안구";
         String dong = "안양동";
         String doro = "장내로149번길 53";
-        String build_no = "674-81";
+        String buildNo = "674-81";
         String branch = "안양역점";
         BigDecimal latitude = BigDecimal.valueOf(126.922145);
         BigDecimal longitude = BigDecimal.valueOf(37.4002960);
@@ -98,7 +98,7 @@ class FeedTagRepositoryTest {
                 .sigungu(sigungu)
                 .dong(dong)
                 .doro(doro)
-                .buildNo(build_no)
+                .buildNo(buildNo)
                 .branch(branch)
                 .latitude(latitude)
                 .longitude(longitude)

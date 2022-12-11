@@ -26,22 +26,22 @@ public class TagRepositoryTest {
 
     @Test
     @DisplayName("피드 태그 등록을 요청하면 새로운 피드 태그가 등록된다")
-    public void registerNewCafe(){
+    public void registerNewTag(){
         // given
         String tagName = "태그입니다.";
-        Tag tag = tagRepository.save(new Tag(tagName));
+        Tag tag = tagRepository.save(new Tag(tagName, 0));
 
         // then
         assertThat(tag.getTagName()).isEqualTo(tagName);
     }
 
     @Test
-    @DisplayName("모든 피드 태그를 반환한다")
-    public void getAllFeed() {
+    @DisplayName("모든 태그를 반환한다")
+    public void getAllTag() {
         // given
         String tagName = "태그입니다.";
-        tagRepository.save(new Tag(tagName));
-        tagRepository.save(new Tag(tagName));
+        tagRepository.save(new Tag(tagName, 0));
+        tagRepository.save(new Tag(tagName, 0));
 
         // when
         List<Tag> tags = tagRepository.findAll();

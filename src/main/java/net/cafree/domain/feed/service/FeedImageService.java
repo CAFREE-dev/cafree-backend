@@ -17,11 +17,11 @@ public class FeedImageService {
     private final FeedImageRepository feedImageRepository;
 
     @Transactional
-    public List<FeedImage> saveAll(FeedAddRequest feedAddRequest, Feed feed){
+    public List<FeedImage> saveAll(FeedAddRequest feedAddRequest, Feed feed) {
         return feedImageRepository.saveAll(feedAddRequest.toFeedImageEntity(feed));
     }
 
-    public FeedImage findById(Long id){
+    public FeedImage findById(Long id) {
         return feedImageRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
@@ -29,16 +29,16 @@ public class FeedImageService {
         return feedImageRepository.findBySequence(1);
     }
 
-    public List<FeedImage> findByFeed(Feed feed){
+    public List<FeedImage> findByFeed(Feed feed) {
         return feedImageRepository.findByFeed(feed);
     }
 
-    public List<FeedImage> findByFeedId(Long feedId){
+    public List<FeedImage> findByFeedId(Long feedId) {
         return feedImageRepository.findByFeedId(feedId);
     }
 
     @Transactional
-    public void deleteAll(Long id) {
-        feedImageRepository.deleteAll(findByFeedId(id));
+    public void deleteAll(Long feedId) {
+        feedImageRepository.deleteAll(findByFeedId(feedId));
     }
 }
