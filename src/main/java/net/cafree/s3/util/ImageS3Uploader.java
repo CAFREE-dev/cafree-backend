@@ -16,7 +16,7 @@ import java.util.Random;
 
 @RequiredArgsConstructor
 @Component
-public class ImageS3Uploader implements FileUploader{
+public class ImageS3Uploader implements FileUploader {
     @Value("${cloud.aws.s3-bucket}")
     @Getter
     private String s3Bucket;
@@ -27,26 +27,29 @@ public class ImageS3Uploader implements FileUploader{
     private final AmazonS3 amazonS3Client;
 
     @Override
-    public List<String> upload(List<MultipartFile> multipartFiles, Long feedId) throws IOException {
-        List<String> imageUrls = new ArrayList<>();
+    public List<S3File> upload(List<MultipartFile> multipartFiles, Long feedId) throws IOException {
+        List<S3File> s3Files = new ArrayList<>();
 
         for (MultipartFile multipartFile : multipartFiles) {
-            imageUrls.add(putS3(
-                    multipartFile,
-                    createFileName(feedId, multipartFile.getOriginalFilename()),
-                    getObjectMetadata(multipartFile))
-            );
+            String fileName = createFileName(feedId, multipartFile.getOriginalFilename());
+            s3Files.add(S3File.builder()
+                            .fileName(fileName)
+                            .fileUrl(putS3(
+                                    multipartFile,
+                                    fileName,
+                                    getObjectMetadata(multipartFile)))
+                            .build());
         }
-        return imageUrls;
+        return s3Files;
     }
 
     @Override
-    public void deleteFromS3(List<String> urls) {
-        urls.forEach(this::delete);
+    public void deleteFromS3(List<String> fileNames) {
+        fileNames.forEach(this::delete);
     }
 
     private void delete(String filename) {
-        if(!amazonS3Client.doesObjectExist(s3Bucket, filename)){
+        if(!amazonS3Client.doesObjectExist(s3Bucket, filename)) {
             throw new AmazonS3Exception("Object " + filename + " does not exist");
         }
         amazonS3Client.deleteObject(new DeleteObjectRequest(s3Bucket, filename));
