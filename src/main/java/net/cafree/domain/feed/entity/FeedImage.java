@@ -16,6 +16,8 @@ public class FeedImage {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String imageName;
+
     @Column(length = 255, nullable = false)
     private String imageUrl;
 
@@ -26,7 +28,8 @@ public class FeedImage {
     @JoinColumn(name = "feed_id")
     private Feed feed;
 
-    public FeedImage(String imageUrl, Feed feed, Integer sequence) {
+    public FeedImage(String imageName, String imageUrl, Integer sequence, Feed feed) {
+        this.imageName = imageName;
         this.imageUrl = imageUrl;
         this.feed = feed;
         this.sequence = sequence;

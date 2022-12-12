@@ -4,15 +4,16 @@ import lombok.Builder;
 import net.cafree.domain.cafe.entity.Cafe;
 import net.cafree.domain.feed.entity.Feed;
 import net.cafree.domain.feed.entity.FeedImage;
-import net.cafree.domain.feed.entity.Tag;
 import net.cafree.domain.member.entity.Member;
+import net.cafree.s3.util.S3File;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public record FeedAddRequest(String contents,
                              Double rating,
-                             List<String> imageUrls,
+                             List<MultipartFile> images,
                              List<Integer> imageSequences,
                              List<String> tags,
                              Long cafeId) {
@@ -29,11 +30,15 @@ public record FeedAddRequest(String contents,
                 .build();
     }
 
-    public List<FeedImage> toFeedImageEntity(Feed feed) {
+    public List<FeedImage> toFeedImageEntity(Feed feed, List<S3File> images) {
         List<FeedImage> feedImages = new ArrayList<>();
 
         for(int i=0 ; i<imageSequences.size() ; i++) {
-            feedImages.add(new FeedImage(imageUrls.get(i), feed, imageSequences.get(i)));
+            feedImages.add(new FeedImage(
+                    images.get(i).getFileName(),
+                    images.get(i).getFileUrl(),
+                    imageSequences.get(i),
+                    feed));
         }
 
         return feedImages;
