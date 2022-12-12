@@ -62,6 +62,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'junit:junit:4.13.2'
 
+	compileOnly 'com.aventrix.jnanoid:jnanoid:2.0.0'
+	implementation 'com.google.code.findbugs:jsr305:3.0.2'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
@@ -72,4 +76,5 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 	testImplementation 'org.mockito:mockito-junit-jupiter'
+	testImplementation 'com.google.code.findbugs:jsr305:3.0.2'
 }
