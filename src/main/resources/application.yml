@@ -17,7 +17,20 @@ spring:
       format_sql: true
       default_batch_fetch_size: 1000
 
-  logging:
-    level:
-      root: info
-      org.hibernate.SQL: debug
+cloud:
+  aws:
+    region:
+      static:
+        ap-northeast-2
+    stack:
+      auto:
+        false
+
+logging:
+  level:
+    root: info
+    org.hibernate.SQL: debug
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
