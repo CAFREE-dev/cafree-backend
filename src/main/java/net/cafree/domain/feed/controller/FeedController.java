@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,7 +54,7 @@ public class FeedController {
     }
 
     @PostMapping
-    public ResponseEntity<FeedResponse> feedAdd(@RequestBody @Validated FeedAddRequest feedAddRequest){
+    public ResponseEntity<FeedResponse> feedAdd(@RequestBody @Validated FeedAddRequest feedAddRequest) throws IOException {
         Feed feed = feedService.save(feedAddRequest, cafeService.findById(feedAddRequest.cafeId()), null);
         List<FeedImage> feedImages = feedImageService.saveAll(feedAddRequest, feed);
         List<Tag> tags = tagService.saveAll(feedAddRequest);
