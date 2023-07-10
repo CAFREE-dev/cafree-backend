@@ -2,9 +2,11 @@ name: CI to dev branch
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: 
+      - develop
   pull_request:
-    branches: [ "develop" ]
+    branches: 
+      - develop
 
 permissions:
   contents: read
