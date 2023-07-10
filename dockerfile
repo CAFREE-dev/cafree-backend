@@ -15,4 +15,3 @@
      "-Dspring.profiles.active=prod",\
      "cafree-1.0.0-SNAPSHOT.jar"\
  ]
- 
